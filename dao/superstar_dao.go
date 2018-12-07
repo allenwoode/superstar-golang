@@ -20,7 +20,7 @@ func (dao *SuperstarDao) Get(id int) *model.Star {
 	if ok && err == nil {
 		return star
 	}
-	star.Id = 0
+	//star.Id = 0
 	return star
 }
 
@@ -45,9 +45,9 @@ func (dao *SuperstarDao) Create(star *model.Star) error {
 }
 
 func (dao *SuperstarDao) Delete(id int) error {
-	var star *model.Star
-	star.Id = int64(id)
-	_, err := dao.engine.Delete(star)
+	//var star *model.Star
+	//star.Id = int64(id)
+	_, err := dao.engine.Delete(&model.Star{Id: id})
 	return err
 }
 

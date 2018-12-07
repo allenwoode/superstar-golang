@@ -1,0 +1,21 @@
+GET http://localhost:8080/api
+
+###
+
+POST http://localhost:8080/api/save
+Content-Type: application/json
+
+{
+  "Avatar": "www.google.com",
+  "NameZh": "谷歌",
+  "NameEn": "Google"
+}
+###
+
+POST http://localhost:8080/api/delete
+Content-Type: application/json
+
+{
+  "Id":8
+}
+###

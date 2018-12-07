@@ -18,4 +18,8 @@ func Configure(b *bootstrap.Bootstrapper) {
 	//admin.Router.Use()
 	admin.Register(superstarSevice)
 	admin.Handle(new(controllers.AdminController))
+
+	api := mvc.New(b.Party("/api"))
+	api.Register(superstarSevice)
+	api.Handle(new(controllers.ApiController))
 }

@@ -56,7 +56,7 @@ func (b *Bootstrapper) SetupSessions(expires time.Duration,
 func (b *Bootstrapper) SetupErrorHandlers() {
 	b.OnAnyErrorCode(func(ctx iris.Context) {
 		err := iris.Map{
-			"app":     b.AppName,
+			"api":     b.AppName,
 			"status":  ctx.GetStatusCode(),
 			"message": ctx.Values().GetString("message"),
 		}
