@@ -1,4 +1,8 @@
-GET http://localhost:8080/api
+GET http://localhost:8080/api/0
+
+###
+
+GET http://localhost:8080/api/search?nameen=China
 
 ###
 

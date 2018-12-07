@@ -28,14 +28,27 @@ func (c *ApiController) GetBy(id int) mvc.Result {
 			Path: "/api/",
 		}
 	}
-	//data := c.Service.Get(id)
-	//if data == nil {
-	//	return mvc.View{
-	//		Name:"404.html",
-	//	}
-	//}
+	data := c.Service.Get(id)
+	if data.Id == 0 {
+		return mvc.Response{
+			Object: viewmodels.Response{
+				iris.StatusNotFound,
+				"数据不存在",
+				nil,
+				nil,
+			},
+		}
+	}
 	return mvc.Response{
-		Object: c.Service.Get(id),
+		Object: data,
+	}
+}
+
+func (c *ApiController) GetSearch() mvc.Result {
+	name := c.Ctx.URLParam("nameen")
+
+	return mvc.Response{
+		Object: c.Service.Search(name),
 	}
 }
 
@@ -57,7 +70,7 @@ func (c *ApiController) GetBy(id int) mvc.Result {
 //}
 //
 func (c *ApiController) PostSave() mvc.Result {
-	var star model.Star
+	var star viewmodels.Star
 	err := c.Ctx.ReadJSON(&star)
 	if err != nil {
 		log.Fatal(err)
@@ -81,7 +94,8 @@ func (c *ApiController) PostDelete() mvc.Result {
 	}
 	if star.Id < 1 {
 		return mvc.Response{
-			Object: viewmodels.Response{201, "操作失败", nil, map[string]string{"message": "数据id不存在"}},
+			Object: viewmodels.Response{iris.StatusInternalServerError, "操作失败",
+				nil, map[string]string{"message": "数据id不存在"}},
 		}
 	}
 	go c.Service.Delete(int(star.Id))

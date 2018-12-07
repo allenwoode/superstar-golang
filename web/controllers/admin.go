@@ -3,6 +3,7 @@ package controllers
 import (
 	"awesome/model"
 	"awesome/service"
+	"awesome/web/viewmodels"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
 	"log"
@@ -43,7 +44,7 @@ func (c *AdminController) GetEdit() mvc.Result {
 }
 
 func (c *AdminController) PostSave() mvc.Result {
-	var star model.Star
+	var star viewmodels.Star
 	err := c.Ctx.ReadForm(&star)
 	if err != nil {
 		log.Fatal(err)
