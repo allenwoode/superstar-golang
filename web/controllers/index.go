@@ -17,7 +17,7 @@ func (c *IndexController) Get() mvc.Result {
 		Name: "index.html",
 		Data: iris.Map{
 			"title": "球星库",
-			"data":  c.Service.GetAll(),
+			"list":  c.Service.GetAll(),
 		},
 	}
 }

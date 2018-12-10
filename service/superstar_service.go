@@ -30,6 +30,10 @@ func NewSuperstarService() *superstarService {
 func (s *superstarService) GetAll() []viewmodels.Star {
 	var list []viewmodels.Star
 	stars := s.dao.GetAll()
+	//var stars []model.Star
+	//stars = append(stars, model.Star{1, "ddddd.com", "中国", "CHN", time.Now(), time.Now()})
+	//stars = append(stars, model.Star{1, "ddddd.com", "中国", "CHN", time.Now(), time.Now()})
+	//stars = append(stars, model.Star{1, "ddddd.com", "中国", "CHN", time.Now(), time.Now()})
 	for _, star := range stars {
 		data := viewmodels.Star{
 			star.Id,

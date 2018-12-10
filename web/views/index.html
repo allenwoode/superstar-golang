@@ -5,6 +5,12 @@
     <title>{{ .title }}</title>
 </head>
 <body>
+    <h1>球星展示</h1>
+    {{range $i, $data := .list}}
+        <a href="/{{.Id}}">
+            <span>{{.NameZh}}</span>
+        </a>
 
+    {{end}}
 </body>
 </html>

@@ -21,6 +21,7 @@ func NewMasterEngine() *xorm.Engine {
 	}
 	lock.Lock()
 	defer lock.Unlock()
+
 	if masterEngine != nil {
 		return masterEngine
 	}
@@ -32,6 +33,12 @@ func NewMasterEngine() *xorm.Engine {
 		log.Fatal("NewMasterEngine err:", err)
 		return nil
 	}
+	engine.ShowSQL(true)
+	engine.SetTZLocation(config.SysTimeLocation)
+
+	cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(), 1000)
+	engine.SetDefaultCacher(cacher)
+
 	masterEngine = engine
 	return masterEngine
 }
